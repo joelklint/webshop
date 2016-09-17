@@ -9,3 +9,8 @@ Vagrant launches a virtual machine so we are developing in the same environment.
 If you want to access the terminal of the virtual machine, simply execute "vagrant ssh"
 in the terminal once the machine is running.
 When you have finished development, execute "vagrant destroy" to turn the machine off
+
+#Mockdata
+- User
+  - username = testuser
+  - password = 123456

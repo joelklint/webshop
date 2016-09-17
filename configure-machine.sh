@@ -47,3 +47,9 @@ sudo a2ensite default-ssl.conf
 
 #Restart apache to activate all new packages and settings
 service apache2 restart
+
+# Copy database and make it writable
+mkdir /db
+cp -f /vagrant/db/database.db /db/database.db
+chmod a+w /db
+chmod a+w /db/database.db

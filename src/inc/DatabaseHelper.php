@@ -9,7 +9,7 @@ class DatabaseHelper {
 
   #Connect to database
   private function dbconnect() {
-    $db = new SQLite3(__DIR__ . '/database.db');
+    $db = new SQLite3('/db/database.db');
     return $db;
   }
 
