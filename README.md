@@ -2,7 +2,7 @@
 1. Install Vagrant (https://www.vagrantup.com/downloads.html)
 2. Go to git repo in terminal
 3. vagrant up (execute in terminal)
-4. go to localhost:1337
+4. go to localhost:8080
 
 #Vagrant
 Vagrant launches a virtual machine so we are developing in the same environment.
