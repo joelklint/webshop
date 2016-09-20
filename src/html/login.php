@@ -9,17 +9,19 @@ $PASSWORD = $_POST['pwd'];
 
 if(!empty($USERNAME && !empty($PASSWORD))){
 
-
 $authenticate = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
 
-if($authenticate){
-  echo "You are logged in";
+  if($authenticate){
+    echo "You are logged in";
+    header("Location: productlist.php");
+    die;
+  }
   else{
     echo "Username or password is incorrect";
-   }
+    header("Location: login.html");
+    die;
   }
-}else{
-  header("Location: login.html");
 }
+header("Location: login.html");
 
 ?>
