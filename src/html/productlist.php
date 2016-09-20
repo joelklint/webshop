@@ -44,7 +44,7 @@ foreach($products as $thisproduct){
   $id = $thisproduct->id();
   $name = $thisproduct->name();
   $desc = $thisproduct->description();
-  $price = "3 miljoner tusen";    //detta ska roppa på price-metoden sen
+  $price = $thisproduct->price(); 
 
   echo "<tr onclick=rowclick('". $id ."')>";
   echo "<td>" . $id . "</td>";
