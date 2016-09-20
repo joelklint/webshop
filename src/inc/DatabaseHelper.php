@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/Product.php';
-require_once __DIR__ . '/User.php';
+require_once __DIR__ . '/models/Product.php';
+require_once __DIR__ . '/models/User.php';
 
 # Class for making interaction with database easier
 class DatabaseHelper {
@@ -30,6 +30,7 @@ class DatabaseHelper {
     return $results;
   }
 
+  #Gets all products from database and returns them as an array of Product models
   public function get_all_products() {
     $sql = "SELECT * FROM PRODUCTS";
     $results = $this->query($sql);

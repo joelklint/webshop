@@ -4,11 +4,13 @@ class Product {
   private $id;
   private $name;
   private $description;
+  private $price;
 
   public function __construct(Array $data) {
     $this->id = $data['ID'];
     $this->name = $data['NAME'];
     $this->description = $data['DESCRIPTION'];
+    $this->price = $data['PRICE'];
   }
 
   public function id() {
@@ -21,6 +23,10 @@ class Product {
 
   public function description() {
     return $this->description;
+  }
+
+  public function price() {
+    return $this->price;
   }
 
 }
