@@ -1,17 +1,26 @@
 <?php
 
- 
+require_once __DIR__ . "/../inc/DatabaseHelper.php";
+$db = new DatabaseHelper();
 
-if(!empty($_POST['inputUsername']) && !empty($_POST['inputPassword'])
-	&& !empty($_POST['inputAddress']) && !empty($_POST['inputConfirmPassword'])){
+$USERNAME = $_POST['inputUsername'];
+$PASSWORD = $_POST['inputPassword'];
+$CONFIRMPASSWORD = $_POST['inputConfirmPassword'];
+$ADDRESS = $_POST['inputAddress'];
 
-$USERNAME=
-$PASSWORD=
-$ADDRESS=
+if(!empty($USERNAME && !empty($PASSWORD)) && !empty($CONFIRMPASSWORD) && !empty($ADDRESS)){
 
-$query = mysqli_query($con, "INSERT INTO `users` (`USERNAME`, `PASSWORD`, `ADDRESS`) VALUES
-('$username', '$password', '$address');");
+	if($PASSWORD == $CONFIRMPASSWORD){
+		/*echo "Samma lösenord";*/
+		$CreateUser = $db->save_new_user_with_username_address_pswd($USERNAME, $ADDRESS, $PASSWORD);
+	}else{
+		echo "Lösenord matchar inte!";
+	}
 
-}
+
+}else{
+  header("Location: signup.html");
+} 
+
 ?>
 
