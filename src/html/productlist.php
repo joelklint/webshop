@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <li ><a href="index.html">Home</a></li>
         <li class="active"><a href="productlist.php">Birds</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
         <li><a href="#">Shoppingcart</a></li>
       </ul>
     </div>
