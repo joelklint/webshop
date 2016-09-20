@@ -6,7 +6,9 @@ $db = new DatabaseHelper();
 $USERNAME = $_POST['uid'];
 $PASSWORD = $_POST['pwd'];
 
+
 if(!empty($USERNAME && !empty($PASSWORD))){
+
 
 $authenticate = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
 
