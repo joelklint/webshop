@@ -4,11 +4,10 @@
     <link rel="stylesheet" type="text/css" href="bootstrapPaper.css">
   </head>
   <body>
-    
+
     <?php
     include __DIR__ . '/navbar.php'
      ?>
-
 
   <div class="col-md-1">
   </div>
