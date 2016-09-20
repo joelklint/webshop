@@ -14,26 +14,30 @@ class DatabaseHelper {
     return $db;
   }
 
-  #Base funtion for performing a query
-  private function query($sql) {
-
+  private function prepare($sql) {
     $db = $this->dbconnect();
+    $statement = $db->prepare($sql);
+    return $statement;
+  }
 
-    $res = $db->query($sql);
-
+  private function get_result_from_prep_statement_as_array($statement) {
+    $result = $statement->execute();
     $results = array();
-
-    while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
       $results[] = $row;
     }
-
     return $results;
+  }
+
+  private function exec_statement_and_get_boolean_response($statement) {
+    $success = $statement->execute();
+    return $success ? true : false;
   }
 
   #Gets all products from database and returns them as an array of Product models
   public function get_all_products() {
-    $sql = "SELECT * FROM PRODUCTS";
-    $results = $this->query($sql);
+    $stmt = $this->prepare('SELECT * FROM products');
+    $results = $this->get_result_from_prep_statement_as_array($stmt);
     $products = array();
     foreach ($results as $result) {
       $products[] = new Product($result);
@@ -42,9 +46,10 @@ class DatabaseHelper {
   }
 
   public function find_user_by_username($username) {
-    $sql = "SELECT * FROM users where username = '" . $username . "'";
-    $result = $this->query($sql);
-    return count($result) == 0 ? null : new User($result[0]);
+    $stmt = $this->prepare('SELECT * FROM users WHERE username = :username');
+    $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+    $results = $this->get_result_from_prep_statement_as_array($stmt);
+    return count($results) == 0 ? null : new User($results[0]);
   }
 
   public function authenticate_with_username_and_psw($username, $password) {
@@ -56,14 +61,18 @@ class DatabaseHelper {
     }
   }
 
+  #Attemts to store a user in database.
+  #Returns true if success, otherwise false.
   public function save_new_user_with_username_address_pswd($username, $address, $psw) {
     $salt = uniqid();
     $hash = $this->hash_password($psw, $salt);
-    $sql = "INSERT INTO users (username, address, salt, password_hash) ";
-    $sql .= "values('$username', '$address', '$salt', '$hash');";
-    $db = $this->dbconnect();
-    $success = $db->exec($sql);
-    return $success;
+    $sql = 'INSERT INTO users (username, address, salt, password_hash) values(:username, :address, :salt, :hash)';
+    $stmt = $this->prepare($sql);
+    $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+    $stmt->bindValue(':address', $address, SQLITE3_TEXT);
+    $stmt->bindValue(':salt', $salt, SQLITE3_TEXT);
+    $stmt->bindValue(':hash', $hash, SQLITE3_TEXT);
+    return $this->exec_statement_and_get_boolean_response($stmt);
   }
 
   private function hash_password($password, $salt) {
