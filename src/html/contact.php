@@ -4,19 +4,11 @@
     <link rel="stylesheet" type="text/css" href="bootstrapPaper.css">
   </head>
   <body>
-    <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">NäbbShop</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="productlist.php">Birds</a></li>
-        <li class="active"><a href="#">Contact</a></li>
-        <li><a href="#">Shoppingcart</a></li>
-      </ul>
-    </div>
-  </nav>
+
+    <?php
+    include __DIR__ . '/navbar.php'
+     ?>
+
 
 <div class="col-md-1">
 </div>

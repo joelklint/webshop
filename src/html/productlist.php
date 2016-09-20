@@ -4,19 +4,11 @@
     <link rel="stylesheet" type="text/css" href="bootstrapPaper.css">
   </head>
   <body>
-    <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">NäbbShop</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li ><a href="index.html">Home</a></li>
-        <li class="active"><a href="productlist.php">Birds</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="#">Shoppingcart</a></li>
-      </ul>
-    </div>
-  </nav>
+    
+    <?php
+    include __DIR__ . '/navbar.php'
+     ?>
+
 
   <div class="col-md-1">
   </div>
@@ -44,7 +36,7 @@ foreach($products as $thisproduct){
   $id = $thisproduct->id();
   $name = $thisproduct->name();
   $desc = $thisproduct->description();
-  $price = $thisproduct->price(); 
+  $price = $thisproduct->price();
 
   echo "<tr onclick=rowclick('". $id ."')>";
   echo "<td>" . $id . "</td>";
