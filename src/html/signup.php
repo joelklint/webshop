@@ -11,16 +11,14 @@ $ADDRESS = $_POST['inputAddress'];
 if(!empty($USERNAME && !empty($PASSWORD)) && !empty($CONFIRMPASSWORD) && !empty($ADDRESS)){
 
 	if($PASSWORD == $CONFIRMPASSWORD){
-		/*echo "Samma lösenord";*/
-		$CreateUser = $db->save_new_user_with_username_address_pswd($USERNAME, $ADDRESS, $PASSWORD);
-	}else{
-		echo "Lösenord matchar inte!";
+		$success = $db->save_new_user_with_username_address_pswd($USERNAME, $ADDRESS, $PASSWORD);
+    if($success) {
+      header("Location: productlist.php");
+      die;
+    }
+
 	}
-
-
-}else{
-  header("Location: signup.html");
-} 
+}
+header("Location: signup.html");
 
 ?>
-
