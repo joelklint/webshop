@@ -44,7 +44,7 @@ foreach($products as $thisproduct){
   $id = $thisproduct->id();
   $name = $thisproduct->name();
   $desc = $thisproduct->description();
-  $price = $thisproduct->price(); 
+  $price = $thisproduct->price();
 
   echo "<tr onclick=rowclick('". $id ."')>";
   echo "<td>" . $id . "</td>";
