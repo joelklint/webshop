@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__ . "/../inc/DatabaseHelper.php";
 $db = new DatabaseHelper();
 
@@ -9,10 +9,12 @@ $PASSWORD = $_POST['pwd'];
 
 if(!empty($USERNAME && !empty($PASSWORD))){
 
-$authenticate = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
+$user = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
 
-  if($authenticate){
-    echo "You are logged in";
+  // Login succesful
+  if($user){
+    $_SESSION["username"] = $user->username();
+    var_dump($_SESSION);
     header("Location: productlist.php");
     die;
   }
