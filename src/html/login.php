@@ -14,10 +14,10 @@ $user = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
   // Login succesful
   if($user){
     $_SESSION["username"] = $user->username();
-    var_dump($_SESSION);
     header("Location: productlist.php");
     die;
   }
+  // Login unseccesful
   else{
     echo "Username or password is incorrect";
     header("Location: login.html");

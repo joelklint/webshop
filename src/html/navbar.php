@@ -16,7 +16,13 @@
     </form> -->
 
     <?php
-    $username = $_SESSION["username"];
+    if(array_key_exists('username', $_SESSION)) {
+      $username = $_SESSION["username"];
+    }
+    else {
+      $username = null;
+    }
+
 
     echo "<ul class='nav navbar-nav navbar-right'>";
     if($username) {
