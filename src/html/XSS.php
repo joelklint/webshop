@@ -16,7 +16,7 @@
 		$fp = fopen('comments.txt', 'a');
 		fwrite($fp, $_POST['content'] . "<hr/>\n");
 		fclose($fp);
-		header("Location: XSS.php");
+		header("Location: XSS.php"); 
 
 	}
 
