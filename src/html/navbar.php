@@ -33,7 +33,7 @@
     }
     else {
       // Render logged out labels
-      echo "<li><a href='login.html'>Login</a></li>";
+      echo "<li><a href='login.php'>Login</a></li>";
       echo "<li><a href='signup.html'>Sign Up</a></li>";
     }
     echo "</ul>";
