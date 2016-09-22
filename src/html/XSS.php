@@ -5,8 +5,11 @@
     <title>XSS test</title> 
   </head>
 
+  <?php
+	include __DIR__ . '/navbar.php'
+  ?>
+
 <?php
-/*include __DIR__ . '/navbar.php'*/
 
 	if($_POST['content']!=null){
 
