@@ -32,7 +32,7 @@
     $cart = array();
   }
 
-  $products = $db->get_products_with_id_numbers($cart);
+  $products = $db->get_products_with_id_numbers(array_keys($cart));
 
   $sum = 0;
 
@@ -42,9 +42,11 @@
     $desc = $thisproduct->description();
     $price = $thisproduct->price();
 
-    $sum += $price;
+    $units = $cart[$id];
 
-    echo "<li class='list-group-item'><span class='pull-right'>". $price ."</span>" .$name . "</li>";
+    $sum += $price*$units;
+
+    echo "<li class='list-group-item'><span class='pull-right'>$units x $price</span>$name</li>";
 
   }
    echo "<div class='col-md-4'></div><div class='col-md-3'><h3> Summa: </h3></div><div class='col-md-5'><h3>". $sum . " kr</h3></div>";

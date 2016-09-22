@@ -6,22 +6,22 @@ if($method == 'POST') {
   // Retrieve which product was clicked
   $product_id = $_POST['product_id'];
   // Retrieve cart from session
-  // $cart = $_SESSION['shopping_cart'];
-  // Create cart if it does not exist
   if(array_key_exists('shopping_cart', $_SESSION)) {
     $cart = $_SESSION['shopping_cart'];
   }
   else {
     $cart = array();
   }
-  // Remove product if already in cart
-  if(in_array($product_id, $cart)) {
-    $index = array_search($product_id, $cart);
-    unset($cart[$index]);
+  // Decide whether to add or remove product
+  $action = $_REQUEST['action'];
+  if($action == 'add') {
+    $cart[$product_id]++;
   }
-  // Add product if it is not in cart
-  else {
-    array_push($cart, $product_id);
+  elseif($action == 'remove' && $cart[$product_id] > 1 ) {
+    $cart[$product_id]--;
+  }
+  elseif($action == 'remove' && $cart[$product_id] == 1 ) {
+    unset($cart[$product_id]);
   }
   $_SESSION['shopping_cart'] = $cart;
 }
@@ -74,8 +74,14 @@ foreach($products as $thisproduct){
   $desc = $thisproduct->description();
   $price = $thisproduct->price();
 
-  $button_label = !in_array($id, $cart) ? "Add to cart" : "Remove from cart";
+  if(array_key_exists($id, $cart)) {
+    $amount_in_cart = $cart[$id];
+  }
+  else {
+    $amount_in_cart = 0;
+  }
 
+  $button_label = !in_array($id, $cart) ? "Add to cart" : "Remove from cart";
   echo "<tr type='submit'>";
     echo "<td>" . $id . "</td>";
     echo "<td>" . $name . "</td>";
@@ -83,7 +89,17 @@ foreach($products as $thisproduct){
     echo "<td>" . $price . "</td>";
     echo "<td>";
       echo "<form action='productlist.php' method='POST'>";
-        echo "<button name='product_id' value='$id'>$button_label</button>";
+        echo "<input name='action' value='remove' style='display:none'>";
+        echo "<button name='product_id' value='$id'>-</button>";
+      echo "</form>";
+    echo "</td>";
+    echo "<td>";
+      echo $amount_in_cart;
+    echo "</td>";
+    echo "<td>";
+      echo "<form action='productlist.php' method='POST'>";
+        echo "<input name='action' value='add' style='display:none'>";
+        echo "<button name='product_id' value='$id'>+</button>";
       echo "</form>";
     echo "</td>";
   echo "</tr>";
