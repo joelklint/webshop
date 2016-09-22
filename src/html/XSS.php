@@ -16,6 +16,7 @@
 		$fp = fopen('comments.txt', 'a');
 		fwrite($fp, $_POST['content'] . "<hr/>\n");
 		fclose($fp);
+		header("Location: XSS.php");
 
 	}
 
@@ -27,7 +28,7 @@
     <form action="XSS.php" method="post">
     <textarea name="content" rows="3" cols="100"></textarea>
     <br/>
-    <input type="submit" value="post" />
+    <input type="submit" value="Post" />
     </form>
 	
 </body> 
