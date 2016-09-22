@@ -56,6 +56,11 @@
 </ul>
 </div>
 </div>
+<div class="col-md-7">
+</div>
+<div class="col-md-3">
+  <a href="checkout.php" class="btn btn-default" onclick=goshopping()>Checkout</a>
+</div>
 <div class="col-md-1">
 </div>
 </body>

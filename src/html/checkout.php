@@ -18,15 +18,24 @@
   require_once __DIR__ . "/../inc/DatabaseHelper.php";
   $db = new DatabaseHelper();
 
-  $products = $db->get_all_products();
+  if(array_key_exists('shopping_cart', $_SESSION)) {
+    $cart = $_SESSION['shopping_cart'];
+  } 
+  if (count($cart) == 0){
+    $cart = array();
+	echo '<script type="text/javascript">alert("Cannot checkout with 0 products in the cart!")</script>';
+	header("Location: productlist.php");
+    die;
+  }
 
+  $products = $db->get_products_with_id_numbers($cart);
   $sum = 0;
 
   foreach($products as $thisproduct){
     $price = $thisproduct->price();
     $sum += $price;
   }
-	
+  
 	$username = $_SESSION["username"];
 	$address = $_SESSION["address"];
 
