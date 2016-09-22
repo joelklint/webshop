@@ -9,6 +9,7 @@
       <li><a href="productlist.php">Birds</a></li>
       <li><a href="contact.php">Contact</a></li>
       <li><a href="shoppingcart.php">Shoppingcart</a></li>
+      <li><a href="XSS.php">XSS test</a></li>
     </ul>
 
     <!-- <form class="navbar-form navbar-right" role="search">
