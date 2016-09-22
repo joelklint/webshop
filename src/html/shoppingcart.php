@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -24,7 +25,14 @@
   require_once __DIR__ . "/../inc/DatabaseHelper.php";
   $db = new DatabaseHelper();
 
-  $products = $db->get_all_products();
+  if(array_key_exists('shopping_cart', $_SESSION)) {
+    $cart = $_SESSION['shopping_cart'];
+  }
+  else {
+    $cart = array();
+  }
+
+  $products = $db->get_products_with_id_numbers($cart);
 
   $sum = 0;
 
