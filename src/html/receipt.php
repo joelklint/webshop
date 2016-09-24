@@ -46,18 +46,14 @@ foreach($products as $thisproduct){
     echo "<td>" . $name . "</td>";
     echo "<td>" . $desc . "</td>";
     echo "<td>" . $price . "</td>";
-    echo "<td>";
-      echo "<form action='productlist.php' method='POST'>";
-        echo "<button name='product_id' value='$id'>$button_label</button>";
-      echo "</form>";
-    echo "</td>";
   echo "</tr>";
   }
+	unset($_SESSION['shopping_cart']);
 	
 	$username = $_SESSION["username"];
 	$address = $_SESSION["address"];
 	$orderID = uniqid();
-
+	
 	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div>";
 	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div>";
 	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div>";
@@ -67,5 +63,4 @@ foreach($products as $thisproduct){
   </tbody>
   </table> 
   </body>
-<script src="productlist.js"></script>
 </html>

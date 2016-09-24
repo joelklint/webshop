@@ -45,7 +45,7 @@
  ?>
 
 <div class="col-md-6">
-		<form action="receipt.php" method="POST" class="form-horizontal">
+		<form name="payform" action="receipt.php" onsubmit="return validateForm()" method="POST" class="form-horizontal">
   <fieldset>
     <legend>Enter Valid Payment information</legend>
     <div class="form-group" >
@@ -63,7 +63,7 @@
     <div class="form-group">
       <label for="inputName" class="col-lg-2 control-label">Full name</label>
       <div class="col-lg-10">
-        <input type="password" class="form-control" name="inputName" placeholder="Full name">
+        <input type="text" class="form-control" name="inputName" placeholder="Full name">
       </div>
     </div>
     <div class="form-group">
@@ -83,5 +83,18 @@
 <div class="col-md-1">
 </div>-->
   </body>
-<script src="productlist.js"></script>
+<script>
+function validateForm() {
+    var card = document.forms["payform"]["inputCardNumber"].value;
+	var cvc = document.forms["payform"]["inputCVC"].value;
+	var name = document.forms["payform"]["inputName"].value;
+	card = card.replace(/\s+/g, '');
+	cvc = cvc.replace(/\s+/g, '');
+	name = name.replace(/\s+/g, '');
+    if (card.length != 16 || cvc.length != 3 || name.length < 1) {
+        alert("Please enter the information in the correct format");
+        return false;
+    }
+}
+</script>
 </html>
