@@ -113,7 +113,8 @@ foreach($products as $thisproduct){
 <div class="col-md-9">
 </div>
 <div class="col-md-3">
-  <a href="#" class="btn btn-default" onclick=goshopping()>Go to Shoppingcart</a>
+
+  <a href="shoppingcart.php" class="btn btn-default">Go to Shoppingcart</a>
 </div>
 <div class="col-md-1">
 </div>

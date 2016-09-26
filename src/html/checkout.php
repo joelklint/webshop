@@ -20,7 +20,7 @@
 
   if(array_key_exists('shopping_cart', $_SESSION)) {
     $cart = $_SESSION['shopping_cart'];
-  } 
+  }
   if (count($cart) == 0){
     $cart = array();
 	echo '<script type="text/javascript">alert("Cannot checkout with 0 products in the cart!")</script>';
@@ -35,15 +35,19 @@
     $price = $thisproduct->price();
     $sum += $price;
   }
-  
+
 	$username = $_SESSION["username"];
 	$address = $_SESSION["address"];
 
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div>";
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div>";
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div>";
- ?>
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
+  echo "<div class='col-md-12'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
+  echo "<div class='col-md-12'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
 
+ ?>
+<div class='col-md-12' style="height:30px;"></div>
+<div class='col-md-2'></div>
 <div class="col-md-6">
 		<form name="payform" action="receipt.php" onsubmit="return validateForm()" method="POST" class="form-horizontal">
   <fieldset>
@@ -82,6 +86,8 @@
 </div>
 <div class="col-md-1">
 </div>-->
+
+</div>
   </body>
 <script>
 function validateForm() {

@@ -27,11 +27,11 @@
 
 <?php
   require_once __DIR__ . "/../inc/DatabaseHelper.php";
-  
+
   $db = new DatabaseHelper();
   $cart = $_SESSION['shopping_cart'];
   $products = $db->get_products_with_id_numbers($cart);
-  
+
   $sum = 0;
 
 foreach($products as $thisproduct){
@@ -39,7 +39,7 @@ foreach($products as $thisproduct){
   $name = $thisproduct->name();
   $desc = $thisproduct->description();
   $price = $thisproduct->price();
-  
+
   $sum += $price;
   echo "<tr type='submit'>";
     echo "<td>" . $id . "</td>";
@@ -49,18 +49,21 @@ foreach($products as $thisproduct){
   echo "</tr>";
   }
 	unset($_SESSION['shopping_cart']);
-	
+
 	$username = $_SESSION["username"];
 	$address = $_SESSION["address"];
 	$orderID = uniqid();
-	
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div>";
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div>";
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div>";
-	echo "<div class='col-md-2'></div><div class='col-md-1'><h5>Order ID: </h5></div><div class='col-md-2'><h5>". $orderID . "</h5></div>";
+
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
+  echo "<div class='col-md-12'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
+  echo "<div class='col-md-12'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
+  echo "<div class='col-md-12'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Order ID: </h5></div><div class='col-md-2'><h5>". $orderID . "</h5></div>";
  ?>
 
   </tbody>
-  </table> 
+  </table>
   </body>
 </html>
