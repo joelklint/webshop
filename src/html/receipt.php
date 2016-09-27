@@ -8,12 +8,6 @@
   if($ref !== 'https://localhost:1337/checkout.php') {
 	die("No permission");
   }
-  
-  #"Fake" check for payment information
-  #if(isset($_SESSION['inputCardNumber'])) {
-  #|| !isset($_SESSION['inputCVC']) || !isset($_SESSION['inputName'])){
-#	header("Location: checkout.php");
-#  }
 ?>
 
 <!DOCTYPE HTML>

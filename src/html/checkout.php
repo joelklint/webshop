@@ -3,6 +3,10 @@
 	if(!$_SESSION['username']) {
 		header("Location: index.php");
 		die();
+	}
+	$ref = $_SERVER['HTTP_REFERER'];
+  if($ref !== 'https://localhost:1337/shoppingcart.php') {
+	die("No permission");
   }
 ?>
 <html>
