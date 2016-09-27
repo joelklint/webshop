@@ -1,3 +1,22 @@
+<?php 
+  session_start();
+  if(!$_SESSION['username']) {
+	header("Location: index.php");
+	die();
+  }
+  $ref = $_SERVER['HTTP_REFERER'];
+  if($ref !== 'https://localhost:1337/checkout.php') {
+	die("No permission");
+  }
+  
+  #"Fake" check for payment information
+  #if(isset($_SESSION['inputCardNumber'])) {
+  #|| !isset($_SESSION['inputCVC']) || !isset($_SESSION['inputName'])){
+#	header("Location: checkout.php");
+#  }
+?>
+
+<!DOCTYPE HTML>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -30,7 +49,7 @@
 
   $db = new DatabaseHelper();
   $cart = $_SESSION['shopping_cart'];
-  $products = $db->get_products_with_id_numbers($cart);
+  $products = $db->get_products_with_id_numbers(array_keys($cart));
 
   $sum = 0;
 
@@ -49,14 +68,13 @@ foreach($products as $thisproduct){
   echo "</tr>";
   }
 	unset($_SESSION['shopping_cart']);
-
 	$username = $_SESSION["username"];
-	$address = $_SESSION["address"];
+	#$address = find_user_by_username($username)['address'];
 	$orderID = uniqid();
 
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";
-  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Delivery address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";

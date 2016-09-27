@@ -1,4 +1,8 @@
-<?php session_start() ?>
+<?php session_start();
+  if(!$_SESSION['username']) {
+	header("Location: index.php");
+  } 
+?>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -24,7 +28,7 @@
   <?php
   require_once __DIR__ . "/../inc/DatabaseHelper.php";
   $db = new DatabaseHelper();
-
+  
   if(array_key_exists('shopping_cart', $_SESSION)) {
     $cart = $_SESSION['shopping_cart'];
   }

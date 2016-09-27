@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	if(!$_SESSION['username']) {
+		header("Location: index.php");
+		die();
+  }
+?>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -17,7 +24,7 @@
 <?php
   require_once __DIR__ . "/../inc/DatabaseHelper.php";
   $db = new DatabaseHelper();
-
+  
   if(array_key_exists('shopping_cart', $_SESSION)) {
     $cart = $_SESSION['shopping_cart'];
   }
@@ -28,7 +35,7 @@
     die;
   }
 
-  $products = $db->get_products_with_id_numbers($cart);
+  $products = $db->get_products_with_id_numbers(array_keys($cart));
   $sum = 0;
 
   foreach($products as $thisproduct){
@@ -36,8 +43,8 @@
     $sum += $price;
   }
 
-	$username = $_SESSION["username"];
-	$address = $_SESSION["address"];
+	$username = $_SESSION['username'];
+	#$address = $db->find_user_by_username($username)['address'];
 
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";
@@ -49,14 +56,14 @@
 <div class='col-md-12' style="height:30px;"></div>
 <div class='col-md-2'></div>
 <div class="col-md-6">
-		<form name="payform" action="receipt.php" onsubmit="return validateForm()" method="POST" class="form-horizontal">
+		<form name="payform" action="paymentcheck.php" onsubmit="return validateForm()" method="POST" class="form-horizontal">
   <fieldset>
     <legend>Enter Valid Payment information</legend>
     <div class="form-group" >
       <label for="inputCardNumber" class="col-lg-2 control-label">Card Number</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" name="inputCardNumber" placeholder="0000 0000 0000 0000">
-      </div>
+	  </div>
     </div>
     <div class="form-group" >
       <label for="inputCVC" class="col-lg-2 control-label">CVC code</label>
