@@ -13,10 +13,16 @@
   <div class="col-md-10">
 <?php
 
+function noXSS($input, $encoding = 'UTF-8')                      /* xss skydd*/
+{
+    return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');   
+}
+
+
 	if($_POST['content']!=null){
 
 		$fp = fopen('comments.txt', 'a');
-		fwrite($fp, $_POST['content'] . "<hr/>\n");
+		fwrite($fp, noXSS($_POST['content']) . "<hr/>\n");
 		fclose($fp);
 		header("Location: XSS.php");
 
