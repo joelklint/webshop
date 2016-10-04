@@ -20,8 +20,9 @@ if ! [ -L /var/www ]; then
   ln -fs /vagrant/src /var/www
 fi
 
-# Link Apache config file
-ln -fs /vagrant/apache2/apache2.conf /etc/apache2/apache2.conf
+# Link Apache config files
+ln -fs /vagrant/config/apache/apache2.conf /etc/apache2/apache2.conf
+ln -fs /vagrant/config/apache/conf-available/security.conf /etc/apache2/conf-available/security.conf
 
 #Activate SSL connection
 sudo a2enmod ssl
@@ -39,11 +40,14 @@ sudo openssl req \
     -out /etc/apache2/ssl/apache.cert
 
 #Insert custom virtual hosts config file
-ln -fs /vagrant/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
-ln -fs /vagrant/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+ln -fs /vagrant/config/apache/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+ln -fs /vagrant/config/apache/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Activate SSL virtual host
 sudo a2ensite default-ssl.conf
+
+#config php
+ln -fs /vagrant/config/php/php.ini /etc/php5/apache2/php.ini
 
 #Restart apache to activate all new packages and settings
 service apache2 restart
