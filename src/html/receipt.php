@@ -64,7 +64,7 @@ foreach($products as $thisproduct){
 	unset($_SESSION['shopping_cart']);
 	$username = $_SESSION["username"];
 	#$address = find_user_by_username($username)['address'];
-	$orderID = uniqid();
+	$orderID = $_SESSION['orderid'];
 
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";

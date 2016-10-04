@@ -32,12 +32,16 @@
   if(array_key_exists('shopping_cart', $_SESSION)) {
     $cart = $_SESSION['shopping_cart'];
   }
+  #Check if cart contains zero items
   if (count($cart) == 0){
     $cart = array();
 	echo '<script type="text/javascript">alert("Cannot checkout with 0 products in the cart!")</script>';
 	header("Location: productlist.php");
     die;
   }
+	#CSRF token protection
+	$_SESSION['ctoken'] = uniqid();
+	$ctoken = $_SESSION['ctoken'];
 
   $products = $db->get_products_with_id_numbers(array_keys($cart));
   $sum = 0;
@@ -81,6 +85,13 @@
         <input type="text" class="form-control" name="inputName" placeholder="Full name">
       </div>
     </div>
+	<div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" name="pwd" placeholder="******">
+      </div>
+    </div>
+	<input type="hidden" class="form-control" name="ctoken" value="<?php echo $ctoken;?>" />
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button type="reset" class="btn btn-default">Reset fields</button>
