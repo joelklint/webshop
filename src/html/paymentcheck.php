@@ -36,19 +36,19 @@
 		}
 	}
 	
-	#Adds values to session, and neutalization of CRLF attack.
-	if($method == 'POST') {
-		$_SESSION['inputCardNumber'] = preg_replace("/[^\\S ]/", '', $_POST['inputCardNumber']);
-		$_SESSION['inputCVC'] = preg_replace("/[^\\S ]/", '', $_POST['inputCVC']);
-		$_SESSION['inputName'] = preg_replace("/[^\\S ]/", '', $_POST['inputName']);
-	}
+	#Adds values to session, and neutralization of CRLF attack.
+	$_SESSION['inputCardNumber'] = preg_replace("/[^\\S ]/", '', $_POST['inputCardNumber']);
+	$_SESSION['inputCVC'] = preg_replace("/[^\\S ]/", '', $_POST['inputCVC']);
+	$_SESSION['inputName'] = preg_replace("/[^\\S ]/", '', $_POST['inputName']);
+	$_SESSION['inputCardNumber'] = htmlspecialchars($_SESSION['inputCardNumber'], ENT_QUOTES, 'UTF-8');
+	$_SESSION['inputCVC'] = htmlspecialchars($_SESSION['inputCVC'], ENT_QUOTES, 'UTF-8');
+	$_SESSION['inputName'] = htmlspecialchars($_SESSION['inputName'], ENT_QUOTES, 'UTF-8');
 	
-   #"Fake" check for payment information
-  if(!isset($_SESSION['inputCardNumber']) || !isset($_SESSION['inputCVC']) || !isset($_SESSION['inputName'])){
-		header("Location: checkout.php");
-	} else {
+	if(strlen($_SESSION['inputCardNumber']) == 16 && strlen($_SESSION['inputCVC']) == 3 && isset($_SESSION['inputName'])) {
 		$_SESSION['orderid'] = uniqid();
 		header("Location: receipt.php");
+	} else {
+		header("Location: checkout.php");
 	}
 	die();
  ?>

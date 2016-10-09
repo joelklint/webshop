@@ -14,6 +14,16 @@ if($method == 'POST') {
 
   if(!empty($USERNAME && !empty($PASSWORD)) && !empty($CONFIRMPASSWORD) && !empty($ADDRESS)){
 
+	#Neutralization of CRLF attack and removes html chars
+	$USERNAME = preg_replace("/[^\\S ]/", '', $USERNAME);
+	$PASSWORD = preg_replace("/[^\\S ]/", '', $PASSWORD);
+	$CONFIRMPASSWORD = preg_replace("/[^\\S ]/", '', $CONFIRMPASSWORD);
+	$ADDRESS = preg_replace("/[^\\S ]/", '', $ADDRESS);
+	$USERNAME = htmlspecialchars($USERNAME, ENT_QUOTES, 'UTF-8');
+	$PASSWORD = htmlspecialchars($PASSWORD, ENT_QUOTES, 'UTF-8');
+	$CONFIRMPASSWORD = htmlspecialchars($CONFIRMPASSWORD, ENT_QUOTES, 'UTF-8');
+	$ADDRESS = htmlspecialchars($ADDRESS, ENT_QUOTES, 'UTF-8');
+  
   	if($PASSWORD == $CONFIRMPASSWORD){
   		$success = $db->save_new_user_with_username_address_pswd($USERNAME, $ADDRESS, $PASSWORD);
       if($success) {

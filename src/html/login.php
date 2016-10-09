@@ -10,6 +10,12 @@ if($method == 'POST') {
 
   if(!empty($USERNAME && !empty($PASSWORD))){
 
+	#Neutralization of CRLF attack and removes html chars
+	$USERNAME = preg_replace("/[^\\S ]/", '', $USERNAME);
+	$PASSWORD = preg_replace("/[^\\S ]/", '', $PASSWORD);
+	$USERNAME = htmlspecialchars($USERNAME, ENT_QUOTES, 'UTF-8');
+	$PASSWORD = htmlspecialchars($PASSWORD, ENT_QUOTES, 'UTF-8');
+	
   $user = $db->authenticate_with_username_and_psw($USERNAME, $PASSWORD);
 
     // Login succesful
