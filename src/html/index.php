@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrapPaper.css">
     <style>
     body {
-    background-image: url('fåglar.jpg');
+    background-image: url('faglar.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
