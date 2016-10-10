@@ -35,7 +35,6 @@
   #Check if cart contains zero items
   if (count($cart) == 0){
     $cart = array();
-	echo '<script type="text/javascript">alert("Cannot checkout with 0 products in the cart!")</script>';
 	header("Location: productlist.php");
     die;
   }
@@ -48,17 +47,14 @@
 
   foreach($products as $thisproduct){
     $price = $thisproduct->price();
-    $sum += $price;
+    $sum += $cart[$thisproduct->id()]*$price;
   }
 
 	$username = $_SESSION['username'];
-	#$address = $db->find_user_by_username($username)['address'];
 
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";
-  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
-  echo "<div class='col-md-12'></div>";
-  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
+  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Total sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
 
  ?>
 <div class='col-md-12' style="height:30px;"></div>
@@ -101,13 +97,6 @@
   </fieldset>
 </form>
 </div>
-<!--<div class="col-md-8">
-</div>
-<div class="col-md-3">
-  <a href="payment.php" class="btn btn-default" onclick=goshopping()>Pay</a>
-</div>
-<div class="col-md-1">
-</div>-->
 
 </div>
   </body>

@@ -52,23 +52,20 @@ foreach($products as $thisproduct){
   $name = $thisproduct->name();
   $desc = $thisproduct->description();
   $price = $thisproduct->price();
-
-  $sum += $price;
+  $units = $cart[$id];
+  $sum += $units*$price;
   echo "<tr type='submit'>";
     echo "<td>" . $id . "</td>";
     echo "<td>" . $name . "</td>";
     echo "<td>" . $desc . "</td>";
-    echo "<td>" . $price . "</td>";
+    echo "<td>" . $units . "x" . $price . "</td>";
   echo "</tr>";
   }
 	unset($_SESSION['shopping_cart']);
 	$username = $_SESSION["username"];
-	#$address = find_user_by_username($username)['address'];
 	$orderID = $_SESSION['orderid'];
 
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Username: </h5></div><div class='col-md-2'><h5>". $username . "</h5></div><div class='col-md-6'></div>";
-  echo "<div class='col-md-12'></div>";
-  echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Delivery address: </h5></div><div class='col-md-2'><h5>". $address . "</h5></div> <div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";
   echo "<div class='col-md-2'></div><div class='col-md-2'><h5>Sum: </h5></div><div class='col-md-2'><h5>". $sum . " kr</h5></div><div class='col-md-6'></div>";
   echo "<div class='col-md-12'></div>";

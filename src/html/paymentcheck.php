@@ -6,7 +6,6 @@
 		die("No permission");
 	}
 	
-	$method = $_SERVER['REQUEST_METHOD'];
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		#CSRF token protection
@@ -17,9 +16,6 @@
 		} else {
 			die("No permission");
 		}
-		
-		require_once __DIR__ . "/../inc/DatabaseHelper.php";
-		$db = new DatabaseHelper();
   
 		$PASSWORD = $_POST['pwd'];
 
@@ -28,12 +24,23 @@
 			die();
 		}
 		
+		require_once __DIR__ . "/../inc/DatabaseHelper.php";
+		$db = new DatabaseHelper();
+		
 		$user = $db->authenticate_with_username_and_psw($_SESSION['username'], $PASSWORD);
 		#Authentication successful
 		if(!$user){
 			header("Location: https://localhost:1337/shoppingcart.php");
 			die();
 		}
+	} else {
+		header("Location: https://localhost:1337/shoppingcart.php");
+		die();
+	}
+	
+	if(!isset($_POST['inputCardNumber']) && !isset($_POST['inputCardNumber']) && !isset($_POST['inputCardNumber'])) {
+		header("Location: https://localhost:1337/shoppingcart.php");
+		die();
 	}
 	
 	#Adds values to session, and neutralization of CRLF attack.
